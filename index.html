@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+  <title>FirefoxOS app with AngularJS and Polymer</title>
+
+  <script src="bower_components/platform/platform.js"></script>
+
+
+  <link rel="stylesheet" href="./css/app.css"/>
+
+
+  <link href="./css/style/headers.css" rel="stylesheet" type="text/css">
+  <link href="./css/style/drawer.css" rel="stylesheet" type="text/css">
+
+
+  <link rel="stylesheet" href="./css/style/buttons.css">
+
+
+
+  <!-- Transitions -->
+  <link rel="stylesheet" href="transitions.css">
+  
+  <!-- Util CSS: some extra tricks -->
+  <link rel="stylesheet" href="util.css">
+  <link rel="stylesheet" href="fonts.css">
+
+  <!-- Additional markup to make Building Blocks kind of cross browser -->
+  <link rel="stylesheet" href="cross_browser.css">
+  <style>
+  #index {
+    height: 100%;
+  }
+  [data-position="right"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    z-index: 15;
+    z-index: 100; /* -> drawer */
+  }
+  section[role="region"][data-position="right"] {
+    position: absolute;
+  }
+
+
+  [data-position="right"].current {
+    animation: rightToCurrent 0.4s forwards;
+    -webkit-animation: rightToCurrent 0.4s forwards;
+  }
+  [data-position="right"].right {
+    animation: currentToRight 0.4s forwards;
+    -webkit-animation: currentToRight 0.4s forwards;
+  }
+  [data-position="current"].left {
+    animation: currentToLeft 0.4s forwards;
+    -webkit-animation: currentToLeft 0.4s forwards;
+  }
+  [data-position="current"].current {
+    animation: leftToCurrent 0.4s forwards;
+    -webkit-animation: leftToCurrent 0.4s forwards;
+  }
+  [data-position="back"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0;
+    /* z-index: 100; -> drawer */
+  }
+  [data-position="back"].fade-in {
+    z-index: 120;
+    animation: fadeIn 0.2s forwards;
+    -webkit-animation: fadeIn 0.2s forwards;
+  }
+  [data-position="back"].fade-out {
+    animation: fadeOut 0.2s forwards;
+    -webkit-animation: fadeOut 0.2s forwards;
+  }
+
+  [data-position="edit-mode"] {
+    position: absolute;
+    top: -5rem;
+    left: 0;
+    right: 0;
+    bottom: -7rem;
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+  [data-position="edit-mode"].edit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 120;
+    opacity: 1;
+  }
+
+  /* Headers */
+  #headers section[role="region"] {
+    margin-bottom: 1.5rem;
+  }
+  #headers section[role="region"]:not(#drawer) {
+    display: inline;
+  }
+  #headers article header:first-child {
+    margin-top: 1.5rem;
+  }
+  #headers section[role="region"] header h2 {
+    margin: 0 0 1.5rem 0;
+  }
+
+  /* Lists */
+  /* to avoid double background effect on press */
+  [data-type=list] li>a:active { 
+    background-color: transparent;
+  }
+
+  /* Drawer */
+  section[role="region"]:not(#drawer) {
+    transition: none;
+    left: 0;
+    z-index: 0;
+    padding-left: 0;
+  }
+  section[data-type="sidebar"] + section[role="region"] > header:first-child > button, 
+  section[data-type="sidebar"] + section[role="region"] > header:first-child > a {
+    background-position: 3.5rem center;
+  }
+
+  /* Switches */
+  #switches label:last-child {
+    margin-left: 2rem;  
+  }
+
+  /* Scrolling */
+  nav[data-type="scrollbar"] {
+    padding-top: 1rem;
+  }
+  nav[data-type="scrollbar"] p {
+    opacity: 1;
+  }
+
+  /* Seek bars */
+  div[role="slider"] > label.icon {
+    background: no-repeat right top;
+    background-size: 3rem auto;
+  }
+
+  /* Tabs */
+  #tabs .content {
+    padding: 0;
+  }
+  #tabs .content .content {
+    padding: 1.5rem 3rem;
+  }
+
+  /* Filters */
+  [role="tablist"][data-type="filter"] {
+    margin-bottom: 2rem;
+  }
+
+  .bottom[role="tablist"][data-type="filter"] {
+    bottom: auto;
+  }
+
+  /* Device rotation */
+  .landscape section[role="region"]#drawer > header:first-child {
+    /* Whatever needs to be changed on landscape */
+  }
+  </style>
+  
+</head>
+<body ng-controller="AppController">
+
+  <section id="index" data-position="current">
+
+    <section data-type="sidebar">
+      <header>
+        <menu type="toolbar">
+          <a href="#content"><span class="icon icon-add">add</span></a>
+        </menu>
+        <h1>Drawer FirefoxOS App</h1>
+      </header>
+      <nav>
+        <ul>
+          <li><a href="#pageone">Page One</a></li>
+          <li><a href="#pagetwo">Page Two</a></li>
+        </ul>
+      </nav>
+    </section>
+    <section id="drawer" role="region" data-show-drawer="{{showDrawer}}">
+      <header class="fixed">
+        <a href="#content"><span class="icon icon-menu">hide sidebar</span></a>
+        <a ng-click="ctrlDrawer()"><span class="icon icon-menu">show sidebar</span></a>
+        <h1 id="title_header">FirefoxOS Polymer AngularJS</h1>
+      </header>
+      <article class="content scrollable header">
+
+        <div ng-view></div>
+
+      </article>
+    </section> <!-- end drawer -->
+  </section> <!-- end index -->
+
+
+  <script src="lib/angular/angular.js"></script>
+
+  <script src="lib/angular/angular-route.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+
+</body>
+</html>

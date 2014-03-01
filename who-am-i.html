@@ -1,0 +1,39 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<polymer-element name="who-am-i">
+<template id="whoami">
+  <section id="whoami">
+    <p>My name is <strong>{{name}}</strong>!
+      I am <strong>{{age}}</strong> years old.
+      I love <strong>{{fav_thing}}</strong></p>
+      <label for="ageInput">Age:</label>
+      <input id="ageInput" type="range" value="{{age}}">
+      <label for="nameInput">Name:</label>
+      <input id="nameInput" value="{{name}}" placeholder="Your name here...">
+    </section>
+  </template>
+  <script>
+    Polymer('who-am-i', {
+      age: 24,
+      fav_thing: "developing new stuff :)",
+    name: "Francis",
+    nameChanged: function() {
+      if (this.name) {
+        this.name = this.name[0].toUpperCase() +  this.name.slice(1);
+      }
+    }
+  });
+  </script>
+  <style>
+    #whoami{
+      width:80%;
+      margin:0 auto;
+      background-color: #ebebeb;
+      padding:1em;
+      border:1px solid #ebebeb;
+      border-radius:0.6em;
+      -moz-border-radius:0.6em;
+      -webkit-border-radius:0.6em;
+    }
+  </style>
+</polymer-element>

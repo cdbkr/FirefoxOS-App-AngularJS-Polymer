@@ -1,0 +1,21 @@
+{
+  "name": "firefoxos-angularjs-polymer",
+  "version": "0.0.0",
+  "authors": [
+    "Francesco Vitullo <vitullofrancesco@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "~0.2.0",
+    "polymer-elements": "Polymer/polymer-elements#~0.2.0",
+    "polymer-ui-elements": "Polymer/polymer-ui-elements#~0.2.0",
+    "polymer-ui-base-css": "Polymer/polymer-ui-base#~0.2.0"
+  }
+}

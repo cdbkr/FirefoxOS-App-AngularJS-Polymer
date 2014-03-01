@@ -1,0 +1,31 @@
+{
+  "version": "1.0",
+  "name": "FirefoxOS Polymer AngularJS",
+  "description": "A simple app for FirefoxOS, using AngularJS and Polymer",
+  "launch_path": "/index.html",
+  "icons": {
+    "16":  "/img/icons/icon_16.png",
+    "32": "/img/icons/icon_32.png",
+    "48": "/img/icons/icon_48.png",
+    "60": "/img/icons/icon_60.png",
+    "90": "/img/icons/icon_90.png",
+    "120": "/img/icons/icon_120.png",
+    "128": "/img/icons/icon_128.png",
+    "256": "/img/icons/icon_256.png"
+  },
+  "developer": {
+    "name": "Francesco Vitullo",
+    "url": "http://www.francescovitullo.com"
+  },
+  "installs_allowed_from": ["*"],
+  "locales": {
+    "en": {
+      "description": "A simple app for FirefoxOS, using AngularJS and Polymer",
+      "developer": {
+          "name": "Francesco Vitullo",
+          "url": "http://www.francescovitullo.com"
+        }
+    }
+  },
+  "default_locale": "en"
+}
