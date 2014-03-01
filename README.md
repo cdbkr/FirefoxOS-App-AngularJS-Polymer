@@ -18,6 +18,10 @@ Version 1.2.0-rc.3
 <li> Download/clone repository</li>
 <li> execute: bower install </li>
 </ul>
+
+<h1>FirefoxOS Boilerplate</h1>
+If you want this app without Polymer integration, check it out at https://github.com/fvitullo/FirefoxOS-Boilerplate-AngularJS
+
 <h1>License</h1>
 The MIT License (MIT)
 Copyright 2014 Francesco Paolo Vitullo
